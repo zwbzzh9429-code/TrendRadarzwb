@@ -41,7 +41,6 @@ FIELD_CONFIG = [
 # ─────────────────────────────────────────────
 
 def _escape_html(text: str) -> str:
-    ```python
     """转义 HTML 特殊字符，防止 XSS 攻击"""
     return html_lib.escape(text) if text else ""
 
