@@ -535,12 +535,12 @@ class AIAnalyzer:
 
             data = json.loads(json_str)
 
-            # 新版字段解析
-            result.core_trends = data.get("core_trends", "")
-            result.sentiment_controversy = data.get("sentiment_controversy", "")
+            result.what_happened = data.get("what_happened", "")
+            result.mapping = data.get("mapping", "")
+            result.momentum_sentiment = data.get("momentum_sentiment", "")
             result.signals = data.get("signals", "")
             result.rss_insights = data.get("rss_insights", "")
-            result.outlook_strategy = data.get("outlook_strategy", "")
+            result.strategy_question = data.get("strategy_question", "")
 
             # 解析独立展示区概括
             summaries = data.get("standalone_summaries", {})
@@ -556,16 +556,16 @@ class AIAnalyzer:
             result.error = f"JSON 解析错误 (位置 {e.pos}): {e.msg}"
             if error_context:
                 result.error += f"，上下文: ...{error_context}..."
-            # 使用原始响应填充 core_trends，确保有输出
-            result.core_trends = response[:500] + "..." if len(response) > 500 else response
+            result.what_happened = response[:500] + "..." if len(response) > 500 else response
             result.success = True
         except (IndexError, KeyError, TypeError, ValueError) as e:
             result.error = f"响应解析错误: {type(e).__name__}: {str(e)}"
-            result.core_trends = response[:500] if len(response) > 500 else response
+            result.what_happened = response[:500] if len(response) > 500 else response
             result.success = True
         except Exception as e:
             result.error = f"解析时发生未知错误: {type(e).__name__}: {str(e)}"
-            result.core_trends = response[:500] if len(response) > 500 else response
+            result.what_happened = response[:500] if len(response) > 500 else response
             result.success = True
+
 
         return result
