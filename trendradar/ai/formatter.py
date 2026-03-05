@@ -264,3 +264,25 @@ def render_ai_analysis_html_rich(result: AIAnalysisResult) -> str:
     ai_html += """
                 </div>"""
     return ai_html
+
+# ─────────────────────────────────────────────
+# 调度器：根据渠道返回对应的渲染函数
+# ─────────────────────────────────────────────
+
+def get_ai_analysis_renderer(channel_type: str):
+    """
+    根据推送渠道类型获取对应的 AI 分析结果渲染函数
+    """
+    mapping = {
+        "feishu": render_ai_analysis_feishu,
+        "dingtalk": render_ai_analysis_dingtalk,
+        "telegram": render_ai_analysis_markdown,
+        "wecom": render_ai_analysis_markdown,
+        "ntfy": render_ai_analysis_markdown,
+        "bark": render_ai_analysis_markdown,
+        "slack": render_ai_analysis_markdown,
+        "email": render_ai_analysis_html,
+        "html": render_ai_analysis_html_rich,
+    }
+    # 如果渠道匹配不到，默认返回纯文本格式
+    return mapping.get(channel_type, render_ai_analysis_plain)
