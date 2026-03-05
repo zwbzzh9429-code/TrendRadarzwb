@@ -18,11 +18,12 @@ from trendradar.ai.client import AIClient
 class AIAnalysisResult:
     """AI 分析结果"""
     # 新版 5 核心板块
-    core_trends: str = ""                # 核心热点与舆情态势
-    sentiment_controversy: str = ""      # 舆论风向与争议
+    what_happened: str = ""                # 事实速报
+    mapping: str = ""                    # 深度映射
+    momentum_sentiment: str = ""      # 热点势能与舆论断层
     signals: str = ""                    # 异动与弱信号
     rss_insights: str = ""               # RSS 深度洞察
-    outlook_strategy: str = ""           # 研判与策略建议
+    strategy_question: str = ""           # 策略研判与思考题
     standalone_summaries: Dict[str, str] = field(default_factory=dict)  # 独立展示区概括 {源ID: 概括}
 
     # 基础元数据
